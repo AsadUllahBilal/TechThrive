@@ -14,7 +14,7 @@ It’s designed for **tech products** like mobiles, laptops, accessories, and mo
 ## ✨ Features
 
 ✅ **Modern UI** – Built with TailwindCSS for sleek, responsive design  
-✅ **Authentication** – Google, GitHub, and Email/Password login with NextAuth  
+✅ **Authentication** – Google, and Email/Password login with NextAuth  
 ✅ **Admin Dashboard** – Manage products, categories, and orders  
 ✅ **Product Management** – Add, edit, and delete products with Cloudinary image uploads  
 ✅ **Category System** – Organize products into categories (Mobiles, Laptops, Accessories, etc.)  
@@ -26,15 +26,22 @@ It’s designed for **tech products** like mobiles, laptops, accessories, and mo
 
 ## 📂 Project Structure
 
+```plaintext
 TechThrive/
-│── app/ # Next.js app router pages & layouts
-│── components/ # Reusable UI components
-│── lib/ # Utilities (DB connection, authentication, etc.)
-│── models/ # Mongoose models
-│── public/ # Static assets
-│── styles/ # Global styles
-│── .env.local # Environment variables
-│── package.json # Project metadata & dependencies
+├── app/                # Next.js App Router pages & layouts
+├── components/         # Reusable UI components
+├── lib/                # Utilities (DB connection, authentication, etc.)
+├── models/             # Mongoose models
+├── public/             # Static assets
+├── types/              # TypeScript type definitions & interfaces
+├── constants/          # Application-wide constants
+├── features/           # Feature-specific modules
+├── assets/             # Design assets (images, icons, SVGs)
+├── config/             # Project & service configurations
+├── hooks/              # Custom React hooks
+├── .env.local          # Environment variables (local development)
+└── package.json        # Project metadata & dependencies
+```
 
 
 ---
@@ -45,7 +52,7 @@ TechThrive/
 - **Backend:** Next.js API Routes, MongoDB, Mongoose
 - **Auth:** NextAuth.js (Google, GitHub, Credentials)
 - **Image Uploads:** Cloudinary
-- **State Management:** React Hooks / Context API
+- **State Management:** React Hooks / Zustand
 
 ---
 
