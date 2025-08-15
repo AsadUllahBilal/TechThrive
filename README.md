@@ -26,19 +26,22 @@ It’s designed for **tech products** like mobiles, laptops, accessories, and mo
 
 ## 📂 Project Structure
 
-**app/**   Contains Next.js App Router pages, layouts, and route handlers. This is where your core application UI and routing logic live.
-**components/**   Houses reusable UI components (buttons, navbars, forms, modals, etc.) used across the project for consistency.
-**lib/**   Stores utility functions like database connections, authentication helpers, API wrappers, and other shared logic.
-**models/**   Contains Mongoose models that define the structure and schema for your MongoDB collections.
-**public/**   Static files such as images, icons, favicons, and fonts accessible directly via /.
-**types/**  Holds TypeScript type definitions & interfaces to ensure type safety across the project.
-**constants/**	Stores application-wide constants such as API endpoints, role names, and default settings.
-**features/**	Contains feature-specific logic grouped by functionality (e.g., product management, user dashboard).
-**assets/**	Stores design assets like illustrations, logos, and SVGs used in the UI.
-**config/**	Configuration files for third-party services, API settings, and project environment setup.
-**hooks/**	Custom React hooks for handling reusable logic like authentication, form handling, and state management.
-**.env.local**	Environment variables for local development (API keys, DB URIs) — not committed to GitHub.
-**package.json**	Lists project dependencies, scripts, and metadata for managing the project.
+```plaintext
+TechThrive/
+├── app/                # Next.js App Router pages & layouts
+├── components/         # Reusable UI components
+├── lib/                # Utilities (DB connection, authentication, etc.)
+├── models/             # Mongoose models
+├── public/             # Static assets
+├── types/              # TypeScript type definitions & interfaces
+├── constants/          # Application-wide constants
+├── features/           # Feature-specific modules
+├── assets/             # Design assets (images, icons, SVGs)
+├── config/             # Project & service configurations
+├── hooks/              # Custom React hooks
+├── .env.local          # Environment variables (local development)
+└── package.json        # Project metadata & dependencies
+```
 
 
 ---
