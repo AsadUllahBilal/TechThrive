@@ -5,14 +5,19 @@ import { requireAdmin } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 
-export async function GET(req, { params }) {
+interface Params {
+  id: string;
+}
+
+export async function GET(req: Request, context: { params: Params }) {
   try {
     const session = await getServerSession(authOptions);
     if (!session?.user) throw new Error("Not authenticated");
+    const {id} = context.params
 
     requireAdmin(session.user);
     await connectDB();
-    const order = await Order.findById(params.id)
+    const order = await Order.findById(id)
       .populate("userId", "name email")
       .lean();
 
