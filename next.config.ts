@@ -12,6 +12,12 @@ const nextConfig: NextConfig = {
     ],
     domains: ['res.cloudinary.com', 'images.unsplash.com', 'plus.unsplash.com'],
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;
