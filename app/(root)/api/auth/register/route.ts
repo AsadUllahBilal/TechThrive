@@ -3,7 +3,6 @@ import { connectDB } from "@/lib/mongo";
 import User from "@/models/user.model";
 import { sendVerificationRequest } from "@/lib/mail";
 import bcryptjs from "bcryptjs";
-import crypto from "crypto";
 
 export async function POST(req: Request){
     await connectDB();

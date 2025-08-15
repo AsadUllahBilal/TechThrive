@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/mongo";
 import Review from "@/models/reviews.model";
-import mongoose from "mongoose";
 
 import { getSessionUser } from "@/lib/auth";
 

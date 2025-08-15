@@ -3,7 +3,7 @@ import { connectDB } from "@/lib/mongo";
 import Order from "@/models/order.model";
 import { requireAdmin } from "@/lib/auth";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../../auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 
 export async function GET(req, { params }) {
   try {

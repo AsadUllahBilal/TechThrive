@@ -1,6 +1,5 @@
 "use client";
 
-import PageContainer from "@/components/layout/page-container";
 import { Heading } from "@/components/ui/heading";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useParams } from "next/navigation";
