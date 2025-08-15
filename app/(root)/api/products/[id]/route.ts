@@ -72,28 +72,3 @@ export async function DELETE(
     return NextResponse.json({ error: error.message }, { status: 403 });
   }
 }
-
-export async function GET(
-  req: Request,
-  { params }: { params: { id?: string } }
-) {
-  const { id } = params;
-
-  if (!id) {
-    return new Response("Missing product ID", { status: 400 });
-  }
-
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return new Response("Invalid product ID", { status: 400 });
-  }
-
-  const product = await getProductById(id);
-  if (!product) {
-    return new Response("Product not found", { status: 404 });
-  }
-
-  return new Response(JSON.stringify(product), {
-    status: 200,
-    headers: { "Content-Type": "application/json" },
-  });
-}
