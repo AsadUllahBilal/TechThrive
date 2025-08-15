@@ -26,15 +26,15 @@ It’s designed for **tech products** like mobiles, laptops, accessories, and mo
 
 ## 📂 Project Structure
 
-**TechThrive/**-
-│── app/ # Next.js app router pages & layouts
-│── components/ # Reusable UI components
-│── lib/ # Utilities (DB connection, authentication, etc.)
-│── models/ # Mongoose models
-│── public/ # Static assets
-│── styles/ # Global styles
-│── .env.local # Environment variables
-│── package.json # Project metadata & dependencies
+TechThrive/
+│── app/            # Next.js app router pages & layouts
+│── components/     # Reusable UI components
+│── lib/            # Utilities (DB connection, authentication, etc.)
+│── models/         # Mongoose models
+│── public/         # Static assets
+│── styles/         # Global styles
+│── .env.local      # Environment variables
+│── package.json    # Project metadata & dependencies
 
 
 ---
