@@ -4,14 +4,13 @@ import Product from "@/models/product.model";
 import slugify from "slugify";
 import { getSessionUser, requireAdmin } from "@/lib/auth";
 import mongoose from "mongoose";
-import { getProductById } from "@/lib/getDBProducts";
 
 export async function PUT(
   req: Request,
-  context: {params: Promise<{id: string}>}
+  { params }: { params: { id: string } }
 ) {
   try {
-    const { id } = await context.params;
+    const { id } = params;
     const user = await getSessionUser();
     requireAdmin(user);
 
@@ -42,11 +41,10 @@ export async function PUT(
     }
 
     // Perform update with only updated fields
-    const updatedProduct = await Product.findByIdAndUpdate(
-      id,
-      updatedData,
-      { new: true, runValidators: true }
-    );
+    const updatedProduct = await Product.findByIdAndUpdate(id, updatedData, {
+      new: true,
+      runValidators: true,
+    });
 
     return NextResponse.json(updatedProduct, { status: 200 });
   } catch (error: any) {
