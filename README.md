@@ -26,7 +26,7 @@ It’s designed for **tech products** like mobiles, laptops, accessories, and mo
 
 ## 📂 Project Structure
 
-TechThrive/
+**TechThrive/**-
 │── app/ # Next.js app router pages & layouts
 │── components/ # Reusable UI components
 │── lib/ # Utilities (DB connection, authentication, etc.)
