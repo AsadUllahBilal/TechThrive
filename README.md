@@ -14,7 +14,7 @@ It’s designed for **tech products** like mobiles, laptops, accessories, and mo
 ## ✨ Features
 
 ✅ **Modern UI** – Built with TailwindCSS for sleek, responsive design  
-✅ **Authentication** – Google, GitHub, and Email/Password login with NextAuth  
+✅ **Authentication** – Google, and Email/Password login with NextAuth  
 ✅ **Admin Dashboard** – Manage products, categories, and orders  
 ✅ **Product Management** – Add, edit, and delete products with Cloudinary image uploads  
 ✅ **Category System** – Organize products into categories (Mobiles, Laptops, Accessories, etc.)  
@@ -52,7 +52,7 @@ TechThrive/
 - **Backend:** Next.js API Routes, MongoDB, Mongoose
 - **Auth:** NextAuth.js (Google, GitHub, Credentials)
 - **Image Uploads:** Cloudinary
-- **State Management:** React Hooks / Context API
+- **State Management:** React Hooks / Zustand
 
 ---
 
