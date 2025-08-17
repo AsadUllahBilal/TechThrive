@@ -9,7 +9,12 @@ type PageProps = {
 export const dynamic = "force-dynamic";
 
 async function getData() {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+  // Use absolute URL only in production
+  const baseUrl =
+    process.env.NODE_ENV === "production"
+      ? process.env.NEXT_PUBLIC_BASE_URL || "https://tech-thrive-tau.vercel.app"
+      : "http://localhost:3000";
+
   const [catRes, prodRes] = await Promise.all([
     fetch(`${baseUrl}/api/categories`, {
       cache: "no-store",
@@ -18,12 +23,24 @@ async function getData() {
       cache: "no-store",
     }),
   ]);
+
+  if (!catRes.ok) {
+    throw new Error(`Failed to fetch categories: ${catRes.status}`);
+  }
+  if (!prodRes.ok) {
+    throw new Error(`Failed to fetch products: ${prodRes.status}`);
+  }
+
   const categories = await catRes.json();
   const products = await prodRes.json();
 
   return {
-    categories: Array.isArray(categories) ? categories : categories.categories,
-    products: Array.isArray(products) ? products : products.products,
+    categories: Array.isArray(categories)
+      ? categories
+      : categories.categories || [],
+    products: Array.isArray(products)
+      ? products
+      : products.products || [],
   };
 }
 
