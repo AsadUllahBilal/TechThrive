@@ -10,8 +10,8 @@ export const dynamic = "force-dynamic";
 
 async function getData() {
   const [catRes, prodRes] = await Promise.all([
-    fetch("http://localhost:3000/api/categories", { cache: "no-store" }),
-    fetch("http://localhost:3000/api/products", { cache: "no-store" }),
+    fetch("/api/categories", { cache: "no-store" }),
+    fetch("/api/products", { cache: "no-store" }),
   ]);
 
   const categories = await catRes.json();

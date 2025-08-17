@@ -3,10 +3,10 @@ import HomeClient from "./HomeClient";
 
 async function getData() {
   const [catRes, prodRes] = await Promise.all([
-    fetch("http://localhost:3000/api/categories", {
+    fetch("/api/categories", {
       cache: "no-store",
     }),
-    fetch("http://localhost:3000/api/products", {
+    fetch("/api/products", {
       cache: "no-store",
     }),
   ]);
