@@ -9,11 +9,15 @@ type PageProps = {
 export const dynamic = "force-dynamic";
 
 async function getData() {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
   const [catRes, prodRes] = await Promise.all([
-    fetch("/api/categories", { cache: "no-store" }),
-    fetch("/api/products", { cache: "no-store" }),
+    fetch(`${baseUrl}/api/categories`, {
+      cache: "no-store",
+    }),
+    fetch(`${baseUrl}/api/products`, {
+      cache: "no-store",
+    }),
   ]);
-
   const categories = await catRes.json();
   const products = await prodRes.json();
 

@@ -2,11 +2,12 @@ import { Heading } from "@/components/ui/heading";
 import HomeClient from "./HomeClient";
 
 async function getData() {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
   const [catRes, prodRes] = await Promise.all([
-    fetch("/api/categories", {
+    fetch(`${baseUrl}/api/categories`, {
       cache: "no-store",
     }),
-    fetch("/api/products", {
+    fetch(`${baseUrl}/api/products`, {
       cache: "no-store",
     }),
   ]);
