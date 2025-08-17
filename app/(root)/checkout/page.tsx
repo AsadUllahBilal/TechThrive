@@ -144,7 +144,7 @@ const page = () => {
   }
 
   return (
-    <PageContainer scrollable>
+    <section className="w-full min-h-full px-10 tablet:px-20 py-10">
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -273,7 +273,7 @@ const page = () => {
           </CardContent>
         </Card>
       </div>
-    </PageContainer>
+    </section>
   );
 };
 

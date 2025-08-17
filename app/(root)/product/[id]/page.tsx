@@ -1,22 +1,24 @@
-import ProductDetails from '@/components/ProductDetails';
-import { getProductById } from '@/lib/getDBProducts';
-import Reviews from '@/components/Reviews';
+import ProductDetails from "@/components/ProductDetails";
+import { getProductById } from "@/lib/getDBProducts";
+import Reviews from "@/components/ProductReviews";
 
-type pageProps = {
-    params: {id: Promise<string>}
-}
+type PageProps = {
+  params: { id: string };
+};
 
-const ProductDetailsPage = async ({params}: pageProps) => {
-    const { id } = params;
+export const dynamic = "force-dynamic";
 
-    const productDetails = await getProductById(id);
+const ProductDetailsPage = async ({ params }: PageProps) => {
+  const { id } = params;
+
+  const productDetails = await getProductById(id);
 
   return (
-    <section className='w-full min-h-full px-20 py-10'>
-        <ProductDetails product={productDetails} />
-        <Reviews productId={id} />
+    <section className="w-full min-h-full px-20 py-10">
+      <ProductDetails product={productDetails} />
+      <Reviews productId={id} />
     </section>
-  )
-}
+  );
+};
 
-export default ProductDetailsPage
+export default ProductDetailsPage;
