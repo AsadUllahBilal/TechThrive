@@ -48,19 +48,20 @@ export default function HomeClient({
 
       <div className="w-full bg-[#ddd] rounded-lg flex items-center flex-wrap p-6 gap-3 mt-5 dark:bg-[#222]">
         {Array.isArray(categories) && categories.length > 0 ? (
-  categories.map((cat) => (
-          <Link href={`/category/${cat.slug}`} key={cat._id}>
-            <div className="bg-[#fff] dark:bg-[#171717] w-[157px] rounded-md p-2 grid place-items-center">
-              <img
-                src={cat.image}
-                alt="categoryPic"
-                className="w-full h-[8rem] object-cover"
-              />
-              <p>{cat.name}</p>
-            </div>
-          </Link>
-        ))) : (
-             <p>No categories found</p>
+          categories.map((cat) => (
+            <Link href={`/category/${cat.slug}`} key={cat._id}>
+              <div className="bg-[#fff] dark:bg-[#171717] w-[157px] rounded-md p-2 grid place-items-center">
+                <img
+                  src={cat.image}
+                  alt="categoryPic"
+                  className="w-full h-[8rem] object-cover"
+                />
+                <p>{cat.name}</p>
+              </div>
+            </Link>
+          ))
+        ) : (
+          <p>No categories found</p>
         )}
       </div>
 
@@ -92,7 +93,7 @@ export default function HomeClient({
       )}
 
       <div className="w-full flex items-center gap-6 mt-10 flex-wrap">
-        {filteredProducts.length > 0 ? (
+        {Array.isArray(filteredProducts) && filteredProducts.length > 0 ? (
           filteredProducts.map((p) => (
             <ProductCard key={p._id} productDetails={p} />
           ))
