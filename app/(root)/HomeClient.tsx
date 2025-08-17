@@ -47,7 +47,8 @@ export default function HomeClient({
       )}
 
       <div className="w-full bg-[#ddd] rounded-lg flex items-center flex-wrap p-6 gap-3 mt-5 dark:bg-[#222]">
-        {categories.map((cat) => (
+        {Array.isArray(categories) && categories.length > 0 ? (
+  categories.map((cat) => (
           <Link href={`/category/${cat.slug}`} key={cat._id}>
             <div className="bg-[#fff] dark:bg-[#171717] w-[157px] rounded-md p-2 grid place-items-center">
               <img
@@ -58,7 +59,9 @@ export default function HomeClient({
               <p>{cat.name}</p>
             </div>
           </Link>
-        ))}
+        ))) : (
+             <p>No categories found</p>
+        )}
       </div>
 
       <div className="w-full mt-10">
