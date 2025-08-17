@@ -131,7 +131,7 @@ const SignupPage = () => {
             <div className="flex flex-col w-full mt-6">
               {loading ? (
                 <Button size={"lg"} className="w-full cursor-pointer" disabled>
-                  <Loader2Icon /> Registering...
+                  <Loader2Icon className="animate-spin" /> Registering...
                 </Button>
               ) : (
                 <Button type="submit" className="w-full cursor-pointer">

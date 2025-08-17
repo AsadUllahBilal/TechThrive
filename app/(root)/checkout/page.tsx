@@ -23,6 +23,7 @@ import { CheckoutDataTable } from "@/components/checkout/data-table";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { CartItem } from "@/components/cart/data-table";
+import { Loader2Icon } from "lucide-react";
 
 const formSchema = z.object({
   fullName: z.string().min(2, "Name is required"),
@@ -40,6 +41,7 @@ const page = () => {
   const [selectedItems, setSelectedItems] = useState<CartItem[]>([]);
   const [checkoutItems, setCheckoutItems] = useState([]);
   const [realTotal, setRealTotal] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const data = sessionStorage.getItem("checkoutItems");
@@ -84,10 +86,6 @@ const page = () => {
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    if (selectedItems.length === 0) {
-      alert("Please select at least one item to order.");
-      return;
-    }
 
     if (!session?.user?.id) {
       alert("Please sign in to place an order.");
@@ -115,6 +113,7 @@ const page = () => {
     };
 
     try {
+      setLoading(true);
       const res = await fetch("/api/order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -137,6 +136,7 @@ const page = () => {
       clearCart();
       form.reset();
       router.push("/");
+      setLoading(false);
     } catch (err) {
       console.error(err);
       alert("Error saving Order");
@@ -267,7 +267,11 @@ const page = () => {
                   />
                 </div>
                 <p>Total: ${realTotal}</p>
-                <Button type="submit">Add Order</Button>
+                {loading ? (
+                  <Button disabled><Loader2Icon className="animate-spin" /> Add Order</Button>
+                ) : (
+                  <Button type="submit">Add Order</Button>
+                )}
               </form>
             </Form>
           </CardContent>

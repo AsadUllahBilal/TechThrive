@@ -17,13 +17,6 @@ async function getData() {
     }),
   ]);
 
-  if (!catRes.ok) {
-    throw new Error(`Failed to fetch categories: ${catRes.status}`);
-  }
-  if (!prodRes.ok) {
-    throw new Error(`Failed to fetch products: ${prodRes.status}`);
-  }
-
   const categories = await catRes.json();
   const products = await prodRes.json();
 

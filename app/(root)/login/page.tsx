@@ -135,7 +135,7 @@ const LoginPage = () => {
         <div className="flex-col gap-2 w-full mt-6">
           {loading ? (
             <Button size={"lg"} className="w-full cursor-pointer" disabled>
-              <Loader2Icon /> Logging In...
+              <Loader2Icon className="animate-spin" /> Logging In...
             </Button>
           ) : (
             <Button type="submit" className="w-full cursor-pointer">

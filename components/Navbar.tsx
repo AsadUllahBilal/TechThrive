@@ -84,11 +84,13 @@ const Navbar = () => {
             <ModeToggle />
             <Link href={`/profile/${session?.user?.id}`}>
               <div className="flex items-center justify-center gap-2">
-                <img
+                <Image
                   src={
                     session?.user?.image ||
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8-sy0Y-97bsW5BLoIHWPMIUN-AYMvT9wJrQ&s"
+                    "https://plus.unsplash.com/premium_photo-1723028769916-a767a6b0f719?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZSUyMGljb25zfGVufDB8fDB8fHww"
                   }
+                  height={50}
+                  width={50}
                   alt="ProfilePic"
                   className="w-[40px] h-[40px] rounded-full"
                 />
@@ -165,11 +167,13 @@ const Navbar = () => {
             <div className="mt-3 w-full flex flex-col gap-2">
               <Link href={`/profile/${session?.user?.id}`}>
                 <div className="flex items-center justify-center gap-2">
-                  <img
+                  <Image
                     src={
                       session?.user?.image ||
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8-sy0Y-97bsW5BLoIHWPMIUN-AYMvT9wJrQ&s"
+                      "https://plus.unsplash.com/premium_photo-1723028769916-a767a6b0f719?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZSUyMGljb25zfGVufDB8fDB8fHww"
                     }
+                    height={50}
+                    width={50}
                     alt="ProfilePic"
                     className="w-[40px] h-[40px] rounded-full"
                   />
@@ -201,95 +205,6 @@ const Navbar = () => {
           </Link>
         </div>
       )}
-
-      {/* {session?.user ? (
-        <div
-          className={`fixed top-0 right-0 h-full z-[1000] w-64 bg-[#333] shadow-lg transform p-6 ${
-            isOpen ? "translate-x-0" : "translate-x-full"
-          } transition-transform duration-300 ease-in-out tablet:hidden`}
-          ref={menuRef}
-        >
-          <Button
-            variant={"navbarBtn"}
-            className="rounded-md outline-none cursor-pointer"
-            onClick={() => setIsOpen(false)}
-          >
-            <X size={28} />
-          </Button>
-          <ul className="flex flex-col gap-4 items-center justify-center my-6">
-          <li>
-            <Link
-              href="/"
-              className="dark:text-[#fff] text-[#222] hover:text-gray-500 transition-all dark:hover:text-gray-300"
-            >
-              Home
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/about"
-              className="dark:text-[#fff] text-[#222] hover:text-gray-500 transition-all dark:hover:text-gray-300"
-            >
-              About
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/contact-us"
-              className="dark:text-[#fff] text-[#222] hover:text-gray-500 transition-all dark:hover:text-gray-300"
-            >
-              Contact Us
-            </Link>
-          </li>
-        </ul>
-        <hr />
-        <div className="flex items-center my-3 gap-3">
-          <Link href="/cart">
-          <span>
-            <ShoppingCart />
-          </span>
-        </Link>
-        <Link href="/your-orders">
-          <span>
-            <Package />
-          </span>
-        </Link>
-        </div>
-        <hr />
-          <div className="mt-3 w-full flex flex-col gap-2">
-            <Link href={`/profile/${session?.user?.id}`}>
-              <div className="flex items-center justify-center gap-2">
-                <img
-                  src={
-                    session?.user?.image ||
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8-sy0Y-97bsW5BLoIHWPMIUN-AYMvT9wJrQ&s"
-                  }
-                  alt="ProfilePic"
-                  className="w-[40px] h-[40px] rounded-full"
-                />
-                <p>{session?.user?.name}</p>
-              </div>
-            </Link>
-            <Button variant={"navbarBtn"} size={"lg"} onClick={() => signOut()}>
-              Logout
-            </Button>
-          </div>
-        </div>
-      ) : (
-        <div className="flex gap-3">
-          <ModeToggle />
-          <Link href="/login">
-            <Button variant={"navbarBtn"} size={"lg"}>
-              Login
-            </Button>
-          </Link>
-          <Link href="/signup">
-            <Button variant={"navbarBtn"} size={"lg"}>
-              Sign Up
-            </Button>
-          </Link>
-        </div>
-      )} */}
     </nav>
   );
 };

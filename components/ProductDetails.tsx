@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 import { useCartStore } from "@/lib/cartStore";
 import { Badge } from "./ui/badge";
+import Image from "next/image";
 
 const ProductDetails = ({ product }: any) => {
   const [isClick, setIsClick] = useState(false);
@@ -80,9 +81,11 @@ const ProductDetails = ({ product }: any) => {
           </Link>
         </div>
       </div>
-      <img
+      <Image
         src={product.images[0]}
         alt={product.name}
+        height={100}
+        width={100}
         className="tablet:w-[50%] w-full tablet:h-[30rem] h-[20rem] object-cover"
       />
     </div>

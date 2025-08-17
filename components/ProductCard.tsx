@@ -2,6 +2,7 @@ import { Product } from "@/types/product";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import Image from "next/image";
 
 const ProductCard = ({
   productDetails
@@ -29,10 +30,12 @@ const ProductCard = ({
         <Badge variant={"outline"} className="bg-red-500">{productDetails.brand || "No Brand"}</Badge>
         <Badge variant={"outline"} className="bg-yellow-500">{productDetails.category?.name || "Uncategorized"}</Badge>
       </div>
-      <img
+      <Image
         src={productDetails.images[0]}
         alt={productDetails.name}
-        className="w-full h-[10rem] bg-cover mt-3"
+        height={100}
+        width={100}
+        className="w-full h-[10rem] object-cover mt-3"
       />
       <Link href={`/product/${productDetails._id}`}>
         <h1 className="text-2xl font-bold my-2">
