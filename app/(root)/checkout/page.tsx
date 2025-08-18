@@ -1,6 +1,5 @@
 "use client";
 
-import PageContainer from "@/components/layout/page-container";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -50,13 +49,6 @@ const page = () => {
     }
   }, []);
 
-  useEffect(() => {
-    const data = sessionStorage.getItem("checkoutItems");
-    if (data) {
-      setCheckoutItems(JSON.parse(data));
-    }
-  }, []);
-
   if (!session?.user) {
     return (
       <section className="w-full min-h-full px-20 py-10">
@@ -88,7 +80,17 @@ const page = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
 
     if (!session?.user?.id) {
-      alert("Please sign in to place an order.");
+      toast.error("Please Login to place orders.", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
       return;
     }
 
@@ -144,7 +146,7 @@ const page = () => {
   }
 
   return (
-    <section className="w-full min-h-full px-10 tablet:px-20 py-10">
+    <section className="w-full min-h-full px-2 tablet:px-20 py-10">
       <ToastContainer
         position="top-right"
         autoClose={3000}

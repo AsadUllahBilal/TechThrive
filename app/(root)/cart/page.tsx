@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { ToastContainer, toast, Bounce } from "react-toastify";
 
 export default function CartPage() {
   const { cart, clearCart } = useCartStore();
@@ -30,12 +31,20 @@ export default function CartPage() {
   }
 
   const handleCheckout = () => {
-    const selectedItems = cart.filter((item) =>
-      selectedIds.includes(item._id)
-    );
+    const selectedItems = cart.filter((item) => selectedIds.includes(item._id));
 
     if (selectedItems.length === 0) {
-      alert("Please select at least one product to checkout.");
+      toast.error("Invalid email or Password", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
       return;
     }
 
@@ -45,7 +54,20 @@ export default function CartPage() {
   };
 
   return (
-    <section className="w-full min-h-full px-20 py-10">
+    <section className="w-full min-h-full px-2 tablet:px-20 py-10">
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Bounce}
+      />
       <h1 className="text-2xl font-bold mb-6">Your Cart</h1>
 
       <DataTable selectedIds={selectedIds} setSelectedIds={setSelectedIds} />

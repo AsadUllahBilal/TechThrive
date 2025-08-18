@@ -220,7 +220,7 @@ export function DataTable({ selectedIds, setSelectedIds }: DataTableProps) {
 
   return (
     <div className="w-full">
-      <div className="flex items-center py-4">
+      <div className="flex items-center py-4 flex-wrap">
         <Input
           placeholder="Filter Products"
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}

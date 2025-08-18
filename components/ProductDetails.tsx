@@ -10,6 +10,7 @@ import Image from "next/image";
 const ProductDetails = ({ product }: any) => {
   const [isClick, setIsClick] = useState(false);
   const { addToCart, removeFromCart } = useCartStore();
+  const [orderSelectedItem, setOrderSelectedItem] = useState({});
 
   const handleAddCart = () => {
     addToCart({
@@ -30,16 +31,18 @@ const ProductDetails = ({ product }: any) => {
   };
 
   const navigateToOrderPage = () => {
-    addToCart({
-      _id: product._id || product.id,
-      name: product.name,
-      price: product.price,
-      image: product.images[0],
-      brand: product.brand,
-      description: product.description,
-      category: product.category,
-    });
-  }
+    const productData = [{
+    _id: product._id || product.id,
+    name: product.name,
+    price: product.price,
+    image: product.images[0],
+    brand: product.brand,
+    description: product.description,
+    category: product.category,
+  }];
+
+  sessionStorage.setItem("checkoutItems", JSON.stringify(productData));
+  };
 
   return (
     <div className="w-full flex justify-between gap-10 tablet:flex-nowrap flex-wrap">

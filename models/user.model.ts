@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, {Model} from 'mongoose';
 
 interface IUser extends mongoose.Document {
     name: string;
@@ -24,5 +24,9 @@ const UserSchema = new mongoose.Schema<IUser>({
     provider: {type: String, default: "credentials"},
 },{ timestamps: true});
 
-const User = mongoose.models.User || mongoose.model<IUser>("User", UserSchema);
+
+const User: Model<IUser> =
+  (mongoose.models.User as Model<IUser>) ||
+  mongoose.model<IUser>("User", UserSchema);
+
 export default User;

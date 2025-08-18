@@ -19,6 +19,8 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import { Loader2Icon } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(2, "Category name is required"),
@@ -29,6 +31,7 @@ const formSchema = z.object({
 const Page = () => {
   const router = useRouter();
   const [uploadedImage, setUploadedImage] = useState<string>("");
+  const [loading, setLoading] = useState(false);
 
   const defaultValues = {
     name: "",
@@ -72,6 +75,7 @@ const Page = () => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
+      setLoading(true);
       const res = await fetch("/api/categories", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -80,18 +84,52 @@ const Page = () => {
 
       if (!res.ok) throw new Error("Failed to save category");
 
-      alert("Category saved successfully!");
+      setLoading(false);
+      toast.success("Category Saved Successfully!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
       form.reset();
       setUploadedImage("");
       router.push("/dashboard/product");
     } catch (err) {
       console.error(err);
-      alert("Error saving category");
+      toast.error("Error Saving Category!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     }
   }
 
   return (
     <PageContainer scrollable>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Bounce}
+      />
       <div className="flex-1 space-y-4">
         <Card className="mx-auto w-full">
           <CardHeader>
@@ -101,7 +139,10 @@ const Page = () => {
           </CardHeader>
           <CardContent>
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-8"
+              >
                 {/* Single Image Upload */}
                 <FormField
                   control={form.control}
@@ -160,7 +201,13 @@ const Page = () => {
                   />
                 </div>
 
-                <Button type="submit">Add Category</Button>
+                {loading ? (
+                  <Button disabled>
+                    <Loader2Icon className="animate-spin" /> Add Category
+                  </Button>
+                ) : (
+                  <Button type="submit">Add Category</Button>
+                )}
               </form>
             </Form>
           </CardContent>

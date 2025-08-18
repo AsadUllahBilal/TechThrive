@@ -4,6 +4,7 @@
 
 @theme {
   --breakpoint-tablet: 900px;
+  --breakpoint-card: 638px;
 }
 
 @custom-variant dark (&:is(.dark *));

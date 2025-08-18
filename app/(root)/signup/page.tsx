@@ -48,7 +48,7 @@ const SignupPage = () => {
       if (res.ok) router.push("/verify?email=" + form.email);
     } catch (error) {
       console.log(error);
-      toast.error("Registeration Failed", {
+      toast.error(error || "Registeration Failed", {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,

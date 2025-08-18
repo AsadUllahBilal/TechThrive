@@ -14,7 +14,7 @@ const ProductDetailsPage = async ({ params }: PageProps) => {
   const productDetails = await getProductById(id);
 
   return (
-    <section className="w-full min-h-full px-20 py-10">
+    <section className="w-full min-h-full px-2 tablet:px-20 py-10">
       <ProductDetails product={productDetails} />
       <Reviews productId={id} />
     </section>

@@ -1,46 +1,20 @@
 import { Heading } from "@/components/ui/heading";
 import HomeClient from "./HomeClient";
-
-async function getData() {
-  // Use absolute URL only in production
-  const baseUrl =
-    process.env.NODE_ENV === "production"
-      ? process.env.NEXT_PUBLIC_BASE_URL || "https://tech-thrive-tau.vercel.app"
-      : "http://localhost:3000";
-
-  const [catRes, prodRes] = await Promise.all([
-    fetch(`${baseUrl}/api/categories`, {
-      cache: "no-store",
-    }),
-    fetch(`${baseUrl}/api/products`, {
-      cache: "no-store",
-    }),
-  ]);
-
-  const categories = await catRes.json();
-  const products = await prodRes.json();
-
-  return {
-    categories: Array.isArray(categories)
-      ? categories
-      : categories.categories || [],
-    products: Array.isArray(products)
-      ? products
-      : products.products || [],
-  };
-}
-
+import { getAllCategories, getAllProducts } from "@/lib/getDBData";
 
 export default async function Page() {
-  const { categories, products } = await getData();
+  const [ categories, products ] = await Promise.all([
+    getAllCategories(),
+    getAllProducts()
+  ]);
 
   return (
-    <section className="w-full min-h-full px-20 py-10">
+    <section className="w-full min-h-full px-2 py-10 tablet:px-20 tablet:py-10">
       <Heading
         title="Home Page"
         description="You can buy almost all the Tech Products from this website."
       />
-      <HomeClient categories={categories} products={products} />
+      <HomeClient categories={JSON.parse(JSON.stringify(categories))} products={JSON.parse(JSON.stringify(products))} />
     </section>
   );
 }

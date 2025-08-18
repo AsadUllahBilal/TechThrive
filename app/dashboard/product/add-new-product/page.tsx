@@ -13,6 +13,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { ToastContainer, toast, Bounce } from "react-toastify";
 import {
   Select,
   SelectContent,
@@ -21,12 +22,12 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { Product } from "@/types/product";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Loader2Icon } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -43,6 +44,7 @@ const page = () => {
   const [categories, setCategories] = useState<{ _id: string; name: string }[]>(
     []
   );
+  const [loading, setLoading] = useState(false);
 
   const [uploadedImages, setUploadedImages] = useState<string[]>([]);
   const defaultValues = {
@@ -106,10 +108,11 @@ const page = () => {
       }
     }
     fetchCategories();
-  }, []); // ✅ runs once, no dependency on Data
+  }, []);
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
+      setLoading(true);
       const res = await fetch("/api/products", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -118,17 +121,51 @@ const page = () => {
 
       if (!res.ok) throw new Error("Failed to save product");
 
-      alert("Product saved successfully!");
+      setLoading(false);
+      toast.success("Product Saved Successfully!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
       form.reset();
       setUploadedImages([]);
       router.push("/dashboard/product");
     } catch (err) {
       console.error(err);
-      alert("Error saving product");
+      toast.error("Error Saving Product!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     }
   }
   return (
     <PageContainer scrollable>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Bounce}
+      />
       <div className="flex-1 space-y-4">
         <Card className="mx-auto w-full">
           <CardHeader>
@@ -285,7 +322,13 @@ const page = () => {
                   )}
                 />
 
-                <Button type="submit">Add Product</Button>
+                {loading ? (
+                  <Button disabled>
+                    <Loader2Icon className="animate-spin" /> Add Product
+                  </Button>
+                ) : (
+                  <Button type="submit">Add Product</Button>
+                )}
               </form>
             </Form>
           </CardContent>

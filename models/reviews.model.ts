@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, Document, Model } from "mongoose";
 import Product from "./product.model";
 
 export interface IReview extends Document {
@@ -31,5 +31,8 @@ ReviewSchema.post("findOneAndDelete", function (doc) {
   }
 });
 
-export default mongoose.models.Review ||
+const Review: Model<IReview> =
+  (mongoose.models.Review as Model<IReview>) ||
   mongoose.model<IReview>("Review", ReviewSchema);
+
+export default Review;

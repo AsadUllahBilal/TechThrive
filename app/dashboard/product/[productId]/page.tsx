@@ -13,6 +13,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import { Loader2Icon } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -44,6 +46,7 @@ export default function Page({ params }: PageProps) {
   const [categories, setCategories] = useState<{ _id: string; name: string }[]>(
     []
   );
+  const [loading, setLoading] = useState(false);
 
   const [uploadedImages, setUploadedImages] = useState<string[]>([]);
   const defaultValues = {
@@ -111,6 +114,7 @@ export default function Page({ params }: PageProps) {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
+      setLoading(true);
       const res = await fetch(`/api/products/${(await params).productId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -119,19 +123,51 @@ export default function Page({ params }: PageProps) {
 
       if (!res.ok) throw new Error("Failed to save product");
 
-      alert("Product Edited successfully!");
+      setLoading(false);
+      toast.success("Product Update Successfully!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
       form.reset();
       setUploadedImages([]);
       router.push("/dashboard/product");
     } catch (err) {
       console.error(err);
-      alert("Error Editing product");
-      console.log(err);
-      
+      toast.error("Error Updating Product!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: false,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     }
   }
   return (
     <PageContainer scrollable>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Bounce}
+      />
       <div className="flex-1 space-y-4">
         <Card className="mx-auto w-full">
           <CardHeader>
@@ -288,7 +324,13 @@ export default function Page({ params }: PageProps) {
                   )}
                 />
 
-                <Button type="submit">Edit Product</Button>
+                {loading ? (
+                  <Button disabled>
+                    <Loader2Icon className="animate-spin" /> Update Product
+                  </Button>
+                ) : (
+                  <Button type="submit">Update Product</Button>
+                )}
               </form>
             </Form>
           </CardContent>

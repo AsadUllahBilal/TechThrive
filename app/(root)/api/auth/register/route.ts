@@ -15,9 +15,8 @@ export async function POST(req: Request){
         return NextResponse.json({ error: "User Already Exists" }, {status: 400});
     }
 
-    const otp = Math.floor(100000 + Math.random() * 900000).toString(); // Create a 6-digit OTP
-    // Set OTP expiry to 10 minutes from now
-    const otpExpiry = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes from now
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
 
     const hashedPassword = await bcryptjs.hash(password, 10);
 

@@ -3,11 +3,15 @@ import { authOptions } from "@/lib/auth";
 import { getReviewsByProductId } from "@/lib/getReviewsById";
 import Link from "next/link";
 import ReviewForm from "./ReviewsForm";
+import Image from "next/image";
 
-export default async function ProductReviews({ productId }: { productId: string }) {
+export default async function ProductReviews({
+  productId,
+}: {
+  productId: string;
+}) {
   const session = await getServerSession(authOptions);
 
-  // ✅ fetch reviews directly on server (SSR)
   const reviews = await getReviewsByProductId(productId);
 
   return (
@@ -20,15 +24,26 @@ export default async function ProductReviews({ productId }: { productId: string 
             <div key={review._id} className="border p-3 rounded">
               <div className="flex justify-between">
                 <div className="flex items-center gap-2">
-                  <img
-                    src={
-                      review.user?.profilePicture ||
-                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8-sy0Y-97bsW5BLoIHWPMIUN-AYMvT9wJrQ&s"
-                    }
-                    alt="ProfilePic"
-                    className="w-[40px] h-[40px] rounded-full"
-                  />
-                  <p className="font-semibold">{review.user?.name || "Anonymous"}</p>
+                  {review?.user?.image ? (
+                    <Image
+                      src={review.user?.image}
+                      height={50}
+                      width={50}
+                      alt="ProfilePic"
+                      className="w-[40px] h-[40px] rounded-full"
+                    />
+                  ) : (
+                    <Image
+                      src="https://plus.unsplash.com/premium_photo-1723028769916-a767a6b0f719?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZSUyMGljb25zfGVufDB8fDB8fHww"
+                      height={50}
+                      width={50}
+                      alt="ProfilePic"
+                      className="w-[40px] h-[40px] rounded-full"
+                    />
+                  )}
+                  <p className="font-semibold">
+                    {review.user?.name || "Anonymous"}
+                  </p>
                 </div>
                 <span className="text-yellow-500">
                   {"★".repeat(review.rating)}

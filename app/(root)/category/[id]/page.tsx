@@ -57,7 +57,7 @@ const CategoryPage = async ({ params }: PageProps) => {
   );
 
   return (
-    <section className="w-full min-h-full px-20 py-10">
+    <section className="w-full min-h-full px-2 tablet:px-20 py-10">
       {filterCategories.map((c: any) => (
         <div key={c._id}>
           <img

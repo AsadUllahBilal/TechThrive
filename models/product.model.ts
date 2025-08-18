@@ -70,5 +70,8 @@ ProductSchema.statics.updateReviewStats = async function (productId: string) {
   }
 };
 
-export default (mongoose.models.Product as ProductModel) ||
+const Product: ProductModel =
+  (mongoose.models.Product as ProductModel) ||
   mongoose.model<IProduct, ProductModel>("Product", ProductSchema);
+
+export default Product;

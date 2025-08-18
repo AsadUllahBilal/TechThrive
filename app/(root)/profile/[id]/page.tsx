@@ -3,8 +3,6 @@ import User from "@/models/user.model";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 
 interface ProfilePageProps {
   params: {
@@ -39,9 +37,9 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
   }
 
   return (
-    <section className="w-full px-20 py-10">
-      <div className="flex items-center gap-6">
-        <img src={user.profilePicture || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8-sy0Y-97bsW5BLoIHWPMIUN-AYMvT9wJrQ&s"} alt={user.name} className="w-[160px] h-[160px] rounded-full" />
+    <section className="w-full px-2 flex items-center justify-center tablet:px-20 py-10">
+      <div className="flex items-center gap-6 flex-wrap">
+        <Image src={user.profilePicture || "https://plus.unsplash.com/premium_photo-1723028769916-a767a6b0f719?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZSUyMGljb25zfGVufDB8fDB8fHww"} alt={user.name} className="w-[160px] h-[160px] rounded-full" width={160} height={160} />
         <div>
             <h1 className="text-3xl font-bold">{user.name}</h1>
             <p className="text-gray-500">{user.email}</p>

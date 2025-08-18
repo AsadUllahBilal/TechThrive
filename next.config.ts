@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
         pathname: "/public/sample-products/**",
       },
     ],
-    domains: ['res.cloudinary.com', 'images.unsplash.com', 'plus.unsplash.com'],
+    domains: ['res.cloudinary.com', 'images.unsplash.com', 'plus.unsplash.com', 'lh3.googleusercontent.com'],
   },
   typescript: {
     ignoreBuildErrors: true,

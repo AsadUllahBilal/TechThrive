@@ -19,7 +19,6 @@ const CategorySchema = new Schema<ICategory>(
   { timestamps: true }
 );
 
-// 👇 explicitly declare it as a Model<ICategory>
 const Category: Model<ICategory> =
   (mongoose.models.Category as Model<ICategory>) ||
   mongoose.model<ICategory>("Category", CategorySchema);
