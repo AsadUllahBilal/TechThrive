@@ -39,6 +39,7 @@ const ProductDetails = ({ product }: any) => {
     brand: product.brand,
     description: product.description,
     category: product.category,
+    quantity: 1
   }];
 
   sessionStorage.setItem("checkoutItems", JSON.stringify(productData));
